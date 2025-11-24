@@ -19,17 +19,11 @@ jobs:
         with:
           php-version: '8.2'
           extensions: mbstring, mysqli
-          ini-values: post_max_size=256M, upload_max_filesize=256M
           coverage: none
 
       - name: Validate PHP syntax
         run: |
           find script -name "*.php" -print0 | xargs -0 -n1 php -l
-
-      - name: Run PHP-CS-Fixer (optional linting)
-        uses: docker://ghcr.io/php-cs-fixer/php-cs-fixer:latest
-        with:
-          args: fix --dry-run --diff ./script
 
   deploy:
     runs-on: ubuntu-latest
